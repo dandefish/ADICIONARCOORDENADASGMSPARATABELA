@@ -1,0 +1,5 @@
+##ADICIONAR COORDENADAS GMS PARA TABELA=name
+##camadadepontos=vector
+##arquivocomcoordenadasgms=output vector
+outputs_QGISFIELDCALCULATOR_1=processing.runalg('qgis:fieldcalculator', camadadepontos,'LAT',2,20.0,3.0,True,'CASE WHEN $y<0\nTHEN (floor ($y*-1) || '° ' || floor((($y*-1) - floor ($y*-1)) * 60) ||'\' ' || substr( (tostring(((($y*-1) - floor ($y*-1)) * 60) - floor((($y*-1) - floor ($y*-1)) * 60)) * 60),1,5) || '" S')\nELSE (floor ($y) || '° ' || floor((($y) - floor ($y)) * 60) ||'\' ' || substr( (tostring(((($y) - floor ($y)) * 60) - floor((($y) - floor ($y)) * 60)) * 60),1,5) || '" N')\nEND',None)
+outputs_QGISFIELDCALCULATOR_2=processing.runalg('qgis:fieldcalculator', outputs_QGISFIELDCALCULATOR_1['OUTPUT_LAYER'],'LONG',2,20.0,3.0,True,'CASE WHEN $X<0\nTHEN (floor ($x*-1) || '° ' || floor((($x*-1) - floor ($x*-1)) * 60) ||'\' ' || substr( (tostring(((($x*-1) - floor ($x*-1)) * 60) - floor((($x*-1) - floor ($x*-1)) * 60)) * 60),1,5) || '" W')\nELSE (floor ($x) || '° ' || floor((($x) - floor ($x)) * 60) ||'\' ' || substr( (tostring(((($x) - floor ($x)) * 60) - floor((($x) - floor ($x)) * 60)) * 60),1,5) || '" E')\nEND',arquivocomcoordenadasgms)
